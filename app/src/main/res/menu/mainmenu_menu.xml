@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+            <item
+                android:id="@+id/clearAll"
+                android:title="Clear all" />
+            <item
+                android:id="@+id/sort"
+                android:title="Sort">
+                <menu>
+                    <item
+                        android:id="@+id/sortByName"
+                        android:title="By name" />
+                    <item
+                        android:id="@+id/sortNewToOld"
+                        android:title="New to Old" />
+                    <item
+                        android:id="@+id/sortOldToNew"
+                        android:title="Old to New" />
+                </menu>
+            </item>
+
+    <item
+        android:id="@+id/trash"
+        android:icon="@drawable/trash_icon"
+        android:title="Trash"
+        app:showAsAction="always" />
+</menu>
