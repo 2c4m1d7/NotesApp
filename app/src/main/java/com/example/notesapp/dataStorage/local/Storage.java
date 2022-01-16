@@ -119,18 +119,18 @@ public class Storage extends SQLiteOpenHelper implements IStorage {
 
 
     @Override
-    public boolean delete(Note note) {
-        Note eNote = getAllNotes().get(note.getId());
-        if (eNote != null && eNote.getDate().equals(note.getDate())) {
-            db = this.getWritableDatabase();
+    public boolean delete(TextNote note) {
 
-            try {
-                return db.delete(SQLNote.Notes.TABLE_NAME, SQLNote.Notes._ID + " = ?", new String[]{Integer.toString(note.getId())}) == 1;
-            } finally {
-                db.close();
-            }
+
+        db = this.getWritableDatabase();
+
+        try {
+           // return db.delete(SQLNote.Notes.TABLE_NAME, SQLNote.Notes._ID + " = ?", new String[]{Integer.toString(note.getId())}) == 1;
+            return db.delete(SQLNote.Notes.TABLE_NAME, SQLNote.Notes.COLUMN_NAME_TEXT + " = ? and "+ SQLNote.Notes.COLUMN_NAME_DATE +" = ?", new String[]{note.getText(), note.getDate()}) == 1;
+        } finally {
+            db.close();
         }
-        return false;
+
     }
 
     @Override

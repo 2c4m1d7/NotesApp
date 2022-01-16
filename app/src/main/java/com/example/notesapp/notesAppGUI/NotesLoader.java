@@ -112,8 +112,8 @@ public class NotesLoader implements Response.Listener<String> {
                     Snackbar.make(recyclerView, "Restore " + textNote.getShortText() + "?", Snackbar.LENGTH_LONG).setAction("Cancel", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            controller.removeLocal(textNote);
-                            textNotes.add(position, textNote);
+                            if (controller.removeLocal(textNote))
+                                textNotes.add(position, textNote);
 
                             trashRecyclerViewAdapter.notifyDataSetChanged();
                         }

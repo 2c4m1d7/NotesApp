@@ -32,7 +32,7 @@ public interface IStorage {
      * @param note Instance of the class Note
      * @return true if the note was deleted successfully, otherwise false
      */
-    boolean delete(Note note);
+    boolean delete(TextNote note);
 
     /**
      * Updates the passed note
