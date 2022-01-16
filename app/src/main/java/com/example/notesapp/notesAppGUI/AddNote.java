@@ -71,6 +71,7 @@ public class AddNote extends AppCompatActivity {
                 } else {
                     update = true;
                     textNote = (TextNote) controller.save(text.getText());
+                    message=textNote.getText();
                     if (textNote == null) {
                         return false;
                     } else return true;
