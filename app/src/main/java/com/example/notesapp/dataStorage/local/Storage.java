@@ -135,29 +135,28 @@ public class Storage extends SQLiteOpenHelper implements IStorage {
 
     @Override
     public boolean updateTextNote(TextNote textNote) {
-        Note note = getAllNotes().get(textNote.getId());
-        if (note != null && textNote.getDate().equals(note.getDate())) {
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-
-                db = this.getWritableDatabase();
-
-                LocalDateTime localDateTime = LocalDateTime.now();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
 
 
-                ContentValues values = new ContentValues();
-                values.put(SQLNote.Notes.COLUMN_NAME_TEXT, textNote.getText());
-                values.put(SQLNote.Notes.COLUMN_NAME_DATE, formatter.format(localDateTime));
-                try {
-                    return db.update(SQLNote.Notes.TABLE_NAME, values, SQLNote.Notes._ID + " = ?", new String[]{Integer.toString(textNote.getId())}) == 1;
-                } finally {
-                    db.close();
-                }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
 
+            db = this.getWritableDatabase();
+
+            LocalDateTime localDateTime = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
+
+
+            ContentValues values = new ContentValues();
+            values.put(SQLNote.Notes.COLUMN_NAME_TEXT, textNote.getText());
+            values.put(SQLNote.Notes.COLUMN_NAME_DATE, formatter.format(localDateTime));
+            try {
+                return db.update(SQLNote.Notes.TABLE_NAME, values, SQLNote.Notes._ID + " = ?", new String[]{Integer.toString(textNote.getId())}) == 1;
+            } finally {
+                db.close();
             }
-            return false;
+
         }
         return false;
+
 
     }
 

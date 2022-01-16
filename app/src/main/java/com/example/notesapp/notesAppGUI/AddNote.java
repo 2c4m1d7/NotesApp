@@ -64,31 +64,31 @@ public class AddNote extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (update)
             textNote.setText(text.getText().toString());
-        if (item.getItemId() == R.id.saveMenu && text != null) {
+        if (item.getItemId() == R.id.saveMenu) {
             if (!text.getText().toString().equals("")) {
                 if (update) {
+                    message = text.getText().toString();
                     return controller.update(textNote);
                 } else {
                     update = true;
                     textNote = (TextNote) controller.save(text.getText());
-                    message=textNote.getText();
+                    message = text.getText().toString();
                     if (textNote == null) {
                         return false;
                     } else return true;
                 }
-            }else return super.onOptionsItemSelected(item);
+            } else return super.onOptionsItemSelected(item);
         } else
             return super.onOptionsItemSelected(item);
     }
-
 
 
     @Override
     protected void onPause() {
         if (!text.getText().toString().equals("")) {
             if (update && !message.equals(text.getText().toString())) {
-                controller.update(textNote);
-            } else if(!update) {
+              controller.update(textNote);
+            } else if (!update) {
                 controller.save(text.getText());
             }
         }
