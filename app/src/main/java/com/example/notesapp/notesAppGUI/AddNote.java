@@ -24,6 +24,7 @@ public class AddNote extends AppCompatActivity {
     private boolean update;
     private TreeMap<Integer, TextNote> notes;
     private TextNote textNote;
+    private String message;
 
 
     @Override
@@ -38,8 +39,9 @@ public class AddNote extends AppCompatActivity {
         if (id != null) {
             notes = storage.getAllNotes();
             textNote = notes.get(Integer.parseInt(id));
-            String message = textNote.getText();
+            message = textNote.getText();
             text.setText(message);
+
             storage.close();
             update = true;
 
@@ -83,9 +85,9 @@ public class AddNote extends AppCompatActivity {
     @Override
     protected void onPause() {
         if (!text.getText().toString().equals("")) {
-            if (update) {
+            if (update && !message.equals(text.getText().toString())) {
                 controller.update(textNote);
-            } else {
+            } else if(!update) {
                 controller.save(text.getText());
             }
         }

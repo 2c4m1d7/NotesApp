@@ -35,7 +35,7 @@ public class Trash extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private NoteController controller;
-private NotesLoader notesLoader;
+    private NotesLoader notesLoader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,22 +52,22 @@ private NotesLoader notesLoader;
         controller.login();
         RequestQueue queue = Volley.newRequestQueue(this);
 
-         notesLoader = new NotesLoader(this, recyclerView);
+        notesLoader = new NotesLoader(this, recyclerView);
 
         StringRequest request = new StringRequest(Request.Method.POST, URLs.ROOT_URL + URLs.SELECT_ALL, notesLoader, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
 
             }
-        }){
-                @Override
-                public String getBodyContentType() {
+        }) {
+            @Override
+            public String getBodyContentType() {
                 return "application/x-www-form-urlencoded; charset=UTF-8";
             }
 
-                @Nullable
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("user", new UniqueIDStorage(Trash.this).getUniqueID());
                 return params;

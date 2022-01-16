@@ -157,6 +157,7 @@ public class MainMenu extends AppCompatActivity {
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 
+            controller.login();
 
             int position = viewHolder.getBindingAdapterPosition();
             TextNote textNote = textNotes.remove(position);

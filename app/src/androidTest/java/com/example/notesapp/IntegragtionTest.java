@@ -29,7 +29,9 @@ import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.example.notesapp.dataStorage.local.Storage;
 import com.example.notesapp.noteController.TextNote;
+import com.example.notesapp.notesAppGUI.AddNote;
 import com.example.notesapp.notesAppGUI.MainMenu;
+import com.example.notesapp.notesAppGUI.Trash;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -45,6 +47,8 @@ public class IntegragtionTest {
 
     @Rule
     public ActivityScenarioRule<MainMenu> mActivityTestRule = new ActivityScenarioRule<>(MainMenu.class);
+
+
 
     String a;
     String b;
@@ -118,14 +122,14 @@ public class IntegragtionTest {
         onView(allOf(withId(R.id.title), withText("Sort"), childAtPosition(childAtPosition(withId(R.id.content), 0), 0))).perform(click());
         onView(allOf(withId(R.id.title), withText("New to Old"), childAtPosition(childAtPosition(withId(R.id.content), 0), 0))).perform(click());
         onView(withId(R.id.recyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
-        //  onView((withId(R.id.multilineEditText))).check(matches(withText(b)));
+         onView((withId(R.id.multilineEditText))).check(matches(withText(b)));
         onView(withContentDescription("Navigate up")).perform(click());
 //sort Old to New
         onView(withContentDescription("More options")).perform(click());
         onView(allOf(withId(R.id.title), withText("Sort"), childAtPosition(childAtPosition(withId(R.id.content), 0), 0))).perform(click());
         onView(allOf(withId(R.id.title), withText("Old to New"), childAtPosition(childAtPosition(withId(R.id.content), 0), 0))).perform(click());
         onView(withId(R.id.recyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
-        // onView((withId(R.id.multilineEditText))).check(matches(withText(a+a)));
+         onView((withId(R.id.multilineEditText))).check(matches(withText(a+a)));
         onView(withContentDescription("Navigate up")).perform(click());
 //delete with swipe from mainmenu and trash activity
         onView(withId(R.id.recyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, swipeLeft()));
@@ -137,8 +141,8 @@ public class IntegragtionTest {
         assertEquals(1, storage.getAllNotes().size());
         assertEquals(a + a, storage.getAllNotes().get(0).getText());
         onView(withId(R.id.trashRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, swipeLeft()));
-        //  onView(allOf(withId(R.id.snackbar_action), withText("Cancel"), childAtPosition(childAtPosition(withClassName(is("com.google.android.material.snackbar.Snackbar$SnackbarLayout")), 0), 1), isDisplayed())).perform(click());
-        // onView(withId(R.id.trashRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, swipeLeft()));
+        //onView(allOf(withId(R.id.snackbar_action), withText("Cancel"), childAtPosition(childAtPosition(withClassName(is("com.google.android.material.snackbar.Snackbar$SnackbarLayout")), 0), 1), isDisplayed())).perform(click());
+         //onView(withId(R.id.trashRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, swipeLeft()));
         onView(withContentDescription("Navigate up")).perform(click());
 //delete and restore
         onView(withId(R.id.recyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, swipeLeft()));
